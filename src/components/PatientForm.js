@@ -25,13 +25,12 @@ export const PatientForm = (props) => {
     const getPatientRecord = async (id) => {
         try {
           const doc = await getPatient(id);
-          console.log(doc.data());
           setPatientRecord({ ...doc.data() });
         } catch (error) {
           console.error(error);
         }
         setLoading(false);
-      };
+    };
 
     useEffect(() => {
         console.log("params",params);
