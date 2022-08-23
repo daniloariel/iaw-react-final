@@ -38,7 +38,7 @@ export const PressureForm = (props) => {
           });
         } else {
           await updatePressure(params.id, params.pressureId, pressure);
-          toast("Updated", {
+          toast("Record Updated", {
             type: "success",
           });
         }

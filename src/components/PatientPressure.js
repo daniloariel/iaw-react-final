@@ -5,7 +5,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 export const PatientPressure = () => {
 
-    const [patient, setPatient] = useState({});
     const [pressures, setPressures] = useState([]);
     const [loading, setLoading] = useState(false);
 
@@ -15,10 +14,6 @@ export const PatientPressure = () => {
     const getPatientPressures = async (id) => {
 
         try {
-            const doc = await getPatient(id);
-            const patientInfo = doc.data();
-            setPatient({ ...patientInfo });
-
             const pressuresCollection = await getPressures(id);
             const pressuresTemp = [];
             pressuresCollection.docs.forEach( pressure => {
@@ -43,7 +38,9 @@ export const PatientPressure = () => {
 
     return loading ? (<div>loading...</div>) :(
        <div className="col-md-10 offset-md-1">
-        <button onClick= {() => navigate('/patient/'+params.id+'/pressure/new') }>New Record</button>
+        <br/>
+        <button className="btn btn-primary" onClick= {() => navigate('/patient/'+params.id+'/pressure/new') }>New Record</button>
+        <br></br>
         <table className="table">
             <thead>
                 <tr>

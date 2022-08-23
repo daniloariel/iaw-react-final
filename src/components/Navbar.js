@@ -1,18 +1,5 @@
-import React, { useState, useEffect } from "react";
 
-export const Navbar = (props) => {
-
-    const initialState = {
-        id:"",
-        firstName: "",
-        lastName: "",
-        email: "",
-        dob: "",
-        notes: "",
-        pressures_id: "",
-    }
-
-    const [patient, setPatient] = useState(initialState);
+export const Navbar = () => {
 
     return(
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">

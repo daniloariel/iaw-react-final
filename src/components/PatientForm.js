@@ -55,16 +55,16 @@ export const PatientForm = (props) => {
         e.preventDefault();
     
         if (!verifyEmail(patientRecord.email))
-          return toast("invalid email", { type: "warning", autoClose: 1000 });
-    
+          return toast("invalid email", { type: "warning", autoClose: 2000 });
+
         if (!params.id) {
           await savePatient(patientRecord);
-          toast("New Patient Record Added", {
+          toast("New Patient Added", {
             type: "success",
           });
         } else {
           await updatePatient(params.id, patientRecord);
-          toast("Updated", {
+          toast("Patient Updated", {
             type: "success",
           });
         }
