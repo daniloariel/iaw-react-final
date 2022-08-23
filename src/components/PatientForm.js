@@ -33,7 +33,6 @@ export const PatientForm = (props) => {
     };
 
     useEffect(() => {
-        console.log("params",params);
         if(params.id){
             setLoading(true);
             getPatientRecord(params.id);
@@ -75,14 +74,12 @@ export const PatientForm = (props) => {
         navigate("/");
       };
 
-
     return loading ? (<div>loading...</div>) :(
         <div className="col-md-4 offset-md-4">
             <form onSubmit={handleSubmit} className="card card-body bg-secondary">
-                <label htmlFor="Firstname">Patient Firstname:</label>
                 <div className="input-group mb-3">
-                    <div className="input-group-text bg-dark">
-                        <i className="material-icons">person</i>
+                    <div className="input-group-text bg-light">
+                        <i className="material-icons">First Name</i>
                     </div>
                     <input
                         type="text"
@@ -93,11 +90,9 @@ export const PatientForm = (props) => {
                         onChange={handleInputChange}
                     />
                 </div>
-
-                <label htmlFor="Lastname">Patient Lastname:</label>
                 <div className="input-group mb-3">
-                    <div className="input-group-text bg-dark">
-                        <i className="material-icons">person</i>
+                    <div className="input-group-text bg-light">
+                        <i className="material-icons">Last Name</i>
                     </div>
                     <input
                         type="text"
@@ -108,11 +103,9 @@ export const PatientForm = (props) => {
                         onChange={handleInputChange}
                     />
                 </div>
-
-                <label htmlFor="Email">Patient Email:</label>
                 <div className="input-group mb-3">
-                    <div className="input-group-text bg-dark">
-                        <i className="material-icons">email</i>
+                    <div className="input-group-text bg-light">
+                        <i className="material-icons">Patient email</i>
                     </div>
                     <input
                         type="text"
@@ -123,11 +116,9 @@ export const PatientForm = (props) => {
                         onChange={handleInputChange}
                     />
                 </div>
-
-                <label htmlFor="DOB">Date of Birth:</label>
                 <div className="input-group mb-3">
-                    <div className="input-group-text bg-dark">
-                        <i className="material-icons">date_range</i>
+                    <div className="input-group-text bg-light">
+                        <i className="material-icons">Date of Birth</i>
                     </div>
                     <input
                         type="date"
@@ -138,20 +129,18 @@ export const PatientForm = (props) => {
                         onChange={handleInputChange}
                     />
                 </div>
-
-
-                <label htmlFor="notes">Additional Notes:</label>
+                <label htmlFor="notes">Notes:</label>
                 <textarea
                     rows="3"
                     className="form-control mb-3"
-                    placeholder="Write patientRecord's notes"
+                    placeholder="Write notes"
                     name="notes"
                     value={patientRecord.notes}
                     onChange={handleInputChange}
                 ></textarea>
 
                 <button
-                    className="btn btn-primary btn-block"
+                    className="btn btn-primary"
                     disabled={!patientRecord.email || !patientRecord.firstName}
                 >
                     {props.currentId === "" ? "Save" : "Update"}
@@ -160,3 +149,4 @@ export const PatientForm = (props) => {
         </div>
     );
 }
+export default PatientForm;

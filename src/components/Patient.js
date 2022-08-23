@@ -1,4 +1,3 @@
-
 import { useNavigate } from "react-router-dom";
 
 const Patient = (props) => {
@@ -7,16 +6,16 @@ const Patient = (props) => {
     const navigate = useNavigate();
 
     return (
-        <div>
-            <div>{patient.firstName}</div>
-            <div>{patient.lastName}</div>
-            <div>{patient.email}</div>
-            <div>{patient.notes}</div>
-            <div>ID: {patient.id}</div>
-            <button onClick={ () => navigate('/edit/'+patient.id) }>Edit</button>
-            <div>------------------</div>
-            <br></br>
-        </div>
+        <tr>
+            <th>{patient.firstName}</th>
+            <th>{patient.lastName}</th>
+            <th>{patient.dob}</th>
+            <th>{patient.email}</th>
+            <th>{patient.notes}</th>
+            <th><button className="btn btn-primary" onClick={ () => navigate('patient/'+patient.id+'/pressures' ) }>Blood Pressure history</button></th>
+            <th><button className="btn btn-primary" onClick={ () => navigate('/edit/'+patient.id) }>Edit</button></th>
+            <th><button className="btn btn-danger" onClick={() => props.deletePatient(patient.id) }>Delete</button></th>
+        </tr>
         
     );
 
