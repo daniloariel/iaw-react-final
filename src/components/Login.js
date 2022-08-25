@@ -71,9 +71,9 @@ export const Login = () => {
         <div style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
             <form className="form-signin">
                 <h1 className="h3 mb-3 font-weight-normal">Please sign in</h1>
-                <label for="inputEmail" className="sr-only">Email address</label>
-                    <input type="email" id="inputEmail" className="form-control" placeholder="Email address" value={email} onChange={handleEmailChange} required="" autofocus=""/>
-                <label for="inputPassword" className="sr-only">Password</label>
+                <label className="sr-only">Email address</label>
+                    <input type="email" id="inputEmail" className="form-control" placeholder="Email address" value={email} onChange={handleEmailChange} required="" autoFocus=""/>
+                <label className="sr-only">Password</label>
                 <input type="password" id="inputPassword" className="form-control" placeholder="Password" value={password} onChange={handlePasswordChange} required=""/>
                 <br/>
                 <button className="btn btn-lg btn-primary btn-block" onClick={(e) => {e.preventDefault(); signIn(auth,email,password)}}>Sign in</button>
