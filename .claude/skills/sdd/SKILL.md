@@ -1,7 +1,7 @@
 ---
 name: sdd
 description: Spec-Driven Development. Úsala cuando el usuario quiera implementar una funcionalidad, módulo o sistema nuevo, o un cambio no trivial, y siempre que diga "spec", "especificación", "SDD", "nueva feature", "/sdd". Guía el trabajo por fases con aprobación del usuario entre cada una (constitución → spec → plan → tareas → implementación → verificación) y deja todo documentado en specs/. No la uses para arreglos triviales de una línea.
-argument-hint: "[nueva <nombre> | plan | tareas | implementar | verificar | estado | constitucion]"
+argument-hint: "[nueva <nombre> | plan | tareas | tickets | implementar | verificar | estado | constitucion]"
 ---
 
 # Spec-Driven Development (SDD)
@@ -18,7 +18,11 @@ specs/
     spec.md                    # QUÉ y POR QUÉ (sin detalles técnicos)
     plan.md                    # CÓMO (diseño técnico)
     tasks.md                   # Lista ordenada de tareas con checkboxes
+  board.md                     # Qué tablero se usa (local, trello, github…)
 ```
+
+`tasks.md` es la fuente de verdad del estado. El tablero externo es solo un espejo y se
+conecta mediante adaptadores (`.claude/skills/sdd/boards/`), así que se puede cambiar sin tocar las specs.
 
 Las plantillas están en `.claude/skills/sdd/templates/`. Cópialas, no las improvises.
 
@@ -56,11 +60,18 @@ Requiere plan `Aprobado`.
 2. Incluye una matriz CA → tareas al final y comprueba que no quede ningún CA sin cubrir.
 3. Detente para aprobación.
 
+### Fase 3b — Tickets (`/sdd tickets`)
+Opcional. Se ejecuta automáticamente al aprobar las tareas si `specs/board.md` tiene un adaptador distinto de `local`.
+1. Lee `specs/board.md` y el adaptador correspondiente en `boards/<adaptador>.md`, junto con el contrato de `boards/README.md`.
+2. Ejecuta `preparar` y después `crear` para cada tarea que no tenga ticket. Anota cada `Ticket:` en `tasks.md` y haz commit.
+3. Muestra la tabla Tarea | Ticket | URL.
+
 ### Fase 4 — Implementar (`/sdd implementar`)
 Requiere tasks `Aprobado`.
-- Toma la primera tarea sin marcar. Implementa **solo esa tarea**.
+- Toma la primera tarea sin marcar y márcala `[~]`; si tiene ticket, ejecuta `mover → en-curso`. Implementa **solo esa tarea**.
 - Escribe o actualiza las pruebas que indica la tarea y ejecuta los comandos de verificación de la constitución.
-- Marca el checkbox `[x]` en `tasks.md` y haz un commit por tarea: `feat(NNN): T03 descripción`.
+- Marca el checkbox `[x]` en `tasks.md` y haz un commit por tarea: `feat(NNN): T03 descripción` (con el adaptador `github`, agrega `Closes #N`). Si tiene ticket, ejecuta `mover → hecho`.
+- Si el tablero falla, avisa una vez y sigue: el estado ya quedó en `tasks.md`.
 - Continúa con la siguiente tarea. Detente y pregunta solo si: una tarea falla la verificación y no está clara la causa, aparece una divergencia con la spec (regla 5), o el usuario pidió ir tarea por tarea.
 
 ### Fase 5 — Verificar (`/sdd verificar`)
@@ -69,7 +80,7 @@ Requiere tasks `Aprobado`.
 3. Si todo pasa, cambia los tres documentos a `Estado: Implementado`. Si algo falla, crea las tareas faltantes en `tasks.md` y vuelve a la fase 4.
 
 ### Estado (`/sdd estado`)
-Lista las features de `specs/` con su fase actual, tareas completas/total y lo siguiente que hay que hacer.
+Lista las features de `specs/` con su fase actual, tareas completas/total y lo siguiente que hay que hacer. Si hay tablero, ejecuta `leer` y señala diferencias con `tasks.md` (por ejemplo, alguien movió una tarjeta a mano). Ofrece reconciliar, pero `tasks.md` manda salvo que el usuario diga lo contrario.
 
 ## Sin argumentos
 Si se invoca `/sdd` sin argumentos, ejecuta `estado` y sugiere el próximo paso. Si el usuario describe una funcionalidad en lenguaje natural, trátalo como `nueva`.

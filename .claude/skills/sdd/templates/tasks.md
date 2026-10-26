@@ -4,6 +4,7 @@
 - **Spec:** [spec.md](./spec.md) · **Plan:** [plan.md](./plan.md)
 
 ## Tareas
+<!-- Estado: [ ] por hacer · [~] en curso · [x] hecho. La línea "Ticket:" la agrega /sdd tickets. -->
 - [ ] **T01** — <descripción concreta>
   - Cubre: CA-01
   - Depende de: —
