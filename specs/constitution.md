@@ -42,6 +42,5 @@ Aplicación web para registrar pacientes y sus mediciones de presión arterial. 
 ## Deuda técnica conocida
 - `src/App.test.js` es la prueba por defecto de CRA ("learn react") y falla: hay que reemplazarla.
 - `savePatient`, `updatePatient`, `savePressure` y `updatePressure` no devuelven la promesa (incumplen el principio 4).
-- En `Home.js` la ruta `*` está antes que las rutas de presiones.
 - `Login.js` tiene `console.log` de depuración y `createUser` ignora los errores.
 - La configuración de Firebase está escrita en el código en lugar de variables de entorno (`REACT_APP_*`).
